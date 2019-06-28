@@ -2,11 +2,13 @@ package dev.mongodb.contacts.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dev.mongodb.contacts.model.ApiResponse;
+import dev.mongodb.contacts.model.ContactRequest;
 import dev.mongodb.contacts.service.ContactsApiService;
 
 @Controller
@@ -20,6 +22,12 @@ public class ContactsController {
 	@ResponseBody
 	private ApiResponse checkApiHealth() {
 		return serviceResponse.getAPiHealth();
+	}
+	
+	@RequestMapping(value = "/addcontact", method = RequestMethod.POST)
+	@ResponseBody
+	private ApiResponse addContact(@RequestBody ContactRequest contact) {
+		return serviceResponse.addContact(contact);
 	}
 
 }
